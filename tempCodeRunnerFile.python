@@ -1,41 +1,20 @@
-import math
-
-# Define a base class called Shape
-class Shape:
-    # Define a method to calculate the area of the shape
-    def calculate_area(self):
-        # Raise a NotImplementedError to indicate that this method should be overridden by subclasses
-        raise NotImplementedError("This method should be implemented by subclasses.")
-
-# Define a subclass called Circle that inherits from the Shape class
-class Circle(Shape):
-    # Initialize the attributes of the circle
-    def __init__(self, radius):
-        self.radius = radius
-
-    # Override the calculate_area method for the circle
-    def calculate_area(self):
-        # Use the formula for the area of a circle: pi * r^2
-        return math.pi * self.radius ** 2
-
-# Define a subclass called Rectangle that inherits from the Shape class
-class Rectangle(Shape):
-    def __init__(self, length, width):
-        self.length = length
-        self.width = width
-    def calculate_area(self):
-        return self.length * self.width
-class Triangle(Shape):
-    def __init__(self, base, height):
-        self.base = base
-        self.height = height
-    def calculate_area(self):
-        return 0.5 * self.base * self.height
-my_circle = Circle(5)
-my_rectangle = Rectangle(10, 20)
-my_triangle = Triangle(15, 25)
-print(f"The area of the circle is {my_circle.calculate_area()}.")
-print(f"The area of the rectangle is {my_rectangle.calculate_area()}.")
-print(f"The area of the triangle is {my_triangle.calculate_area()}.")
-
-
+import unittest
+from bankAccount import BankAccount
+class TestBankAccount(unittest.TestCase):
+    def setUp(self):
+        self.my_account = BankAccount("Alice", 1000)
+    def test_deposit(self):
+        self.my_account.deposit(500)
+        self.assertEqual(self.my_account._BankAccount__balance, 1500)
+        self.my_account.deposit(-100)
+        self.assertEqual(self.my_account._BankAccount__balance, 1500)
+    def test_withdraw(self):
+        self.my_account.withdraw(200)
+        self.assertEqual(self.my_account._BankAccount__balance, 800)
+        self.my_account.withdraw(1000)
+        self.assertEqual(self.my_account._BankAccount__balance, 800)
+    def test_display_balance(self):
+        output = self.my_account.display_balance()
+        self.assertEqual(output, "Your balance is 1000.")
+if __name__ == "__main__":
+    unittest.main()
